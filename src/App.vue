@@ -1,9 +1,6 @@
 <template>
   <div>
-    <router-link to="/">Магазин</router-link>
-    <router-link to="/chat">Чат</router-link>
-    <router-link to="/news">News</router-link>
-    <router-view></router-view>
+    <layout></layout>
   </div>
 </template>
 
@@ -11,7 +8,7 @@
 import Layout from "@/views/Layout";
 export default {
   name: "App",
-  components: {},
+  components: { Layout },
   data: () => ({})
 };
 </script>

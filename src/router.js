@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Shop from "./views/Shop.vue";
 import News from "./views/News.vue";
 import Chat from "./views/Chat.vue";
+import Profile from "./views/Profile.vue";
 
 Vue.use(Router);
 
@@ -19,6 +20,10 @@ export default new Router({
     {
       path: "/chat",
       component: Chat
+    },
+    {
+      path: "/profile",
+      component: Profile
     }
   ]
 });
