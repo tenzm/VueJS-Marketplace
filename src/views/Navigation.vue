@@ -8,7 +8,6 @@
     </template>
 
     <v-spacer></v-spacer>
-
     <template v-slot:extension>
       <v-layout style="margin-bottom: 10px;" align-center column justify-center fill-height>
         <v-toolbar-items class="hidden-sm-and-down">
