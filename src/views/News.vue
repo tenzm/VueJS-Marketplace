@@ -1,5 +1,5 @@
 <template>
-  <div x>
+  <div>
     <v-parallax dark :src="require('@/assets/news_header.jpg')" height="150">
       <v-layout align-center column justify-center>
         <h1 class="display-2 font-weight-thin mb-3">Главные новости</h1>
