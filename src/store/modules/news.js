@@ -18,11 +18,15 @@ export default {
     }
   },
   actions: {
-    add_article({ state, commit }, article) {
-      api.axios.put(api.urls["news"], article).then(res=>{
-        console.log(res.data);
+    add_news({ state, commit }, article) {
+      api.axios.post(api.urls["news"], article).then(res=>{
+        commit("add_news", res.data);
       });
-      //commit("add_news", article);
+    },
+    get_news({ state, commit }) {
+      api.axios.get(api.urls["news"]).then(res=>{
+        commit("set_news", res.data);
+      });
     }
   }
 };

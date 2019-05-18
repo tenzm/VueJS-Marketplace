@@ -21,7 +21,8 @@
         </v-card>
       </v-hover>
     </div>
-    <v-btn @click="add_news">Add</v-btn>
+    <v-btn @click="addd_news">Add</v-btn>
+    <v-btn @click="gett_news">Get</v-btn>
   </div>
 </template>
 
@@ -29,26 +30,32 @@
 import { mapState, mapActions } from "vuex";
 export default {
   name: "news",
+  methods: {
+    ...mapActions(["add_news", "get_news"]),
+    getImgUrl(pic) {
+      return require("../assets/" + pic);
+    },
+    addd_news() {
+      let article = {
+        title: prompt("Укажите заголовок", ""),
+        text: prompt("Укажите содержимое", "")
+      };
+      this.add_news(article);
+    },
+    gett_news(){
+      this.get_news();
+    }
+  },
   data: () => ({
     number: 2
   }),
+  beforeMount(){
+      this.gett_news();
+  },
   computed: {
     ...mapState({
       news: state => state.news.news
     })
   },
-  methods: {
-    ...mapActions(["add_article"]),
-    getImgUrl(pic) {
-      return require("../assets/" + pic);
-    },
-    add_news() {
-      let article = {
-        title: prompt("Укажите заголовок", ""),
-        text: prompt("Укажите содержимое", "")
-      };
-      this.add_article(article);
-    }
-  }
 };
 </script>
