@@ -19,9 +19,6 @@ const router = new Router({
     {
       path: "/news",
       component: News,
-      meta: {
-        requiresAuth: true
-      }
     },
     {
       path: "/chat",

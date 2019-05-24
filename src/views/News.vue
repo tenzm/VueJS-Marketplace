@@ -21,7 +21,7 @@
         </v-card>
       </v-hover>
     </div>
-    <v-btn @click="addd_news">Add</v-btn>
+    <v-btn v-if="auth" @click="addd_news">Add</v-btn>
     <v-btn @click="gett_news">Get</v-btn>
   </div>
 </template>
@@ -54,7 +54,8 @@ export default {
   },
   computed: {
     ...mapState({
-      news: state => state.news.news
+      news: state => state.news.news,
+      auth: state => state.users.authorized,
     })
   },
 };
