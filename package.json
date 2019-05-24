@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "jsonwebtoken": "^8.5.1",
     "node": "^12.2.0",
     "nodejs": "0.0.0",
     "register-service-worker": "^1.6.2",
