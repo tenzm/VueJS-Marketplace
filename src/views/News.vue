@@ -55,7 +55,6 @@ export default {
   computed: {
     ...mapState({
       news: state => state.news.news,
-      auth: state => state.users.authorized,
     })
   },
 };

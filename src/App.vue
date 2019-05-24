@@ -22,6 +22,11 @@ export default {
         this.check_authorization(res.data);
       });
   },
+  computed: {
+    ...mapState({
+      auth: state => state.users.authorized,
+    })
+  },
   data: () => ({})
 };
 </script>
