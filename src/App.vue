@@ -11,6 +11,9 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "App",
   components: { Layout },
+  data:()=>({
+    auth: false
+  }),
   methods: {
     ...mapActions(["authorize"]),
     check_authorization: function(is_auth) {
@@ -22,11 +25,5 @@ export default {
         this.check_authorization(res.data);
       });
   },
-  computed: {
-    ...mapState({
-      auth: state => state.users.authorized,
-    })
-  },
-  data: () => ({})
 };
 </script>

@@ -10,7 +10,7 @@
     <v-spacer></v-spacer>
     <template v-slot:extension>
       <v-layout style="margin-bottom: 10px;" align-center column justify-center fill-height>
-        <v-toolbar-items class="hidden-sm-and-down">
+        <v-toolbar-items>
           <v-btn flat round to="/" class="black--text subheading">Магазин</v-btn>
           <v-btn flat round to="/chat" class="black--text subheading">Чат</v-btn>
           <v-btn flat round to="/news" class="black--text subheading">Новости</v-btn>
@@ -18,14 +18,47 @@
       </v-layout>
     </template>
 
-    <v-btn icon class="black--text" to = "/login">
-      <v-icon>account_circle</v-icon>
-    </v-btn>
+    <v-menu open-on-hover bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn icon light v-on="on" class="black--text" style="border: 0;">
+          <v-icon>account_circle</v-icon>
+        </v-btn>
+      </template>
+
+      <v-list>
+        <v-list-tile v-if="!auth" to="/login">
+          <v-list-tile-title>Вход</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile v-if="!auth" to="/registration">
+          <v-list-tile-title>Регистрация</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile v-if="auth" to="/profile">
+          <v-list-tile-title>Профиль</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile v-if="auth" @click="logout">
+          <v-list-tile-title>Выход</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
   </v-toolbar>
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+import { setTimeout } from 'timers';
+
 export default {
-  name: "navigation"
+  name: "navigation",
+  computed: {
+    ...mapState({
+      auth: state => state.users.authorized
+    })
+  },
+  methods:{
+    ...mapActions(["unauthorize"]),
+    logout: function() {
+      this.unauthorize();
+    }
+  }
 };
 </script>
