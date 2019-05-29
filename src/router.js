@@ -1,8 +1,10 @@
 import Vue from "vue";
 import store from "./store/modules/users";
+import api from "@/api";
 import Router from "vue-router";
 import Shop from "./views/Shop.vue";
 import News from "./views/News.vue";
+import AddNews from "./views/AddNews.vue";
 import Chat from "./views/Chat.vue";
 import Profile from "./views/Profile.vue";
 import Registration from "./views/Registration";
@@ -21,6 +23,13 @@ const router = new Router({
       component: News,
     },
     {
+      path: "/add_news",
+      component: AddNews,
+      meta:{
+        requiresAuth: true
+      }
+    },
+    {
       path: "/chat",
       component: Chat
     },
@@ -30,18 +39,22 @@ const router = new Router({
     },
     { path: "/registration", component: Registration },
     { path: "/login", component: Login }
+    
   ]
 });
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
-    // check the meta field
-    if (store.state.authorized) {
-      // check if the user is authenticated
-      next(); // the next method allow the user to continue to the router
-    } else {
-      next("/login"); // Redirect the user to the main page
-    }
+    let authorized = false;
+    api.axios.post(api.urls["check"]).then(res=>{
+      authorized = res.data;
+      if (authorized) {
+        // check if the user is authenticated
+        next(); // the next method allow the user to continue to the router
+      } else {
+        next("/login"); // Redirect the user to the main page
+      }
+    });
   } else {
     next();
   }

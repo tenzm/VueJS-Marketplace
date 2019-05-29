@@ -27,6 +27,18 @@ export default {
       api.axios.get(api.urls["news"]).then(res=>{
         commit("set_news", res.data);
       });
+    },
+    uploadImage({}, formData) {
+      // Отправляем новость на сервер
+      return api.axios
+        .put(api.urls["uploads"] + "/image", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then(res => {
+          return res.data;
+        });
     }
   }
 };

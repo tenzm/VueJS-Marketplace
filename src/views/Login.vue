@@ -45,9 +45,6 @@ export default {
 </script>
 
 <style>
-.v-text-field.v-text-field--enclosed .v-text-field__details, .v-text-field.v-text-field--enclosed > .v-input__control > .v-input__slot{
-  border-radius: 50px;
-}
 .logdiv{
   width: 500px;
   margin: 0 auto;

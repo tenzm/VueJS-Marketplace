@@ -14,7 +14,8 @@ export default {
     users: "/users",
     login: "/auth/login",
     logout: "/auth/logout",
-    check: "/auth/check"
+    check: "/auth/check",
+    uploads: "/uploads"
   },
   axios: axios
 };

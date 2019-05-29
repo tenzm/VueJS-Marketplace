@@ -21,6 +21,7 @@ export default {
     }
   },
   beforeCreate(){
+    console.log("ok");
     api.axios.post(api.urls["check"]).then(res=>{
         this.check_authorization(res.data);
       });

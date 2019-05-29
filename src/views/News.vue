@@ -10,8 +10,8 @@
       <v-hover v-for="(item, key) in news" :key="key" style="margin-top: 10px;">
         <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`" class="mx-auto">
           <v-card-title>
-            <img v-bind:src="getImgUrl('coffee.jpg')" width="150">
-            <div style="padding-left: 20px;">
+            <v-img :src="item.img" aspect-ratio="1" height="150"></v-img>
+            <div style="margin-left: -20px; width: 400px;">
               <span class="headline">{{item.title}}</span>
               <br>
               <span class="subheading">{{item.text}}</span>
@@ -21,8 +21,7 @@
         </v-card>
       </v-hover>
     </div>
-    <v-btn v-if="auth" @click="addd_news">Add</v-btn>
-    <v-btn @click="gett_news">Get</v-btn>
+    <v-btn v-if="auth" @click="go_to_news">Add</v-btn>
   </div>
 </template>
 
@@ -31,24 +30,17 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "news",
   methods: {
-    ...mapActions(["add_news", "get_news"]),
+    ...mapActions(["get_news"]),
     getImgUrl(pic) {
       return require("../assets/" + pic);
     },
-    addd_news() {
-      let article = {
-        title: prompt("Укажите заголовок", ""),
-        text: prompt("Укажите содержимое", "")
-      };
-      this.add_news(article);
-    },
     gett_news(){
       this.get_news();
+    },
+    go_to_news(){
+      this.$router.push('/add_news')
     }
   },
-  data: () => ({
-    number: 2
-  }),
   beforeMount(){
       this.gett_news();
   },
@@ -60,3 +52,9 @@ export default {
   },
 };
 </script>
+<style>
+.v-image__image--cover {
+    width: 150px !important;
+    background-size: cover;
+}
+</style>
