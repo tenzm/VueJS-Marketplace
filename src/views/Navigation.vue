@@ -18,7 +18,7 @@
       </v-layout>
     </template>
 
-    <v-btn icon class="black--text">
+    <v-btn icon class="black--text" to = "/login">
       <v-icon>account_circle</v-icon>
     </v-btn>
   </v-toolbar>

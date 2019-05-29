@@ -28,7 +28,7 @@ const router = new Router({
       path: "/profile",
       component: Profile
     },
-    { path: "/reg", component: Registration },
+    { path: "/registration", component: Registration },
     { path: "/login", component: Login }
   ]
 });
