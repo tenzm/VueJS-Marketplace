@@ -6,9 +6,25 @@
 
 <script>
 import Layout from "@/views/Layout";
+import api from "@/api";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "App",
   components: { Layout },
-  data: () => ({})
+  data:()=>({
+    auth: false
+  }),
+  methods: {
+    ...mapActions(["authorize"]),
+    check_authorization: function(is_auth) {
+      this.authorize(is_auth);
+    }
+  },
+  beforeCreate(){
+    console.log("ok");
+    api.axios.post(api.urls["check"]).then(res=>{
+        this.check_authorization(res.data);
+      });
+  },
 };
 </script>
