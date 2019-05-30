@@ -5,14 +5,12 @@
         <h1 class="display-2 font-weight-thin mb-3">Лента новостей</h1>
       </v-layout>
     </v-parallax>
-    <v-app id="inspire" style="height: 50px; background-color: white; margin-top: 10px;">
       <v-flex text-xs-center>
         <div>
-          <v-btn depressed round large color="primary" v-if="auth" @click="go_to_news">Добавить</v-btn>
+          <v-btn round color="blue darken-2" style="color: white; margin-top:10px;" large v-if="auth" @click="go_to_news">Добавить</v-btn>
         </div>
       </v-flex>
-  </v-app>
-    <div style="margin: 0px auto; width:800px; margin-top: -20px; padding-bottom: 60px">
+    <div style="margin: 0px auto; width:800px; margin-top: 20px; padding-bottom: 60px">
       <div v-for="(item, key) in news" :key="key" style="margin-top: 20px;">
     <span v-if="key == 0 || is_not_equal_date(news[key].createdAt, news[key-1].createdAt)" class="headline font-weight-light" style="margin-top:30px;">{{formatDate(item.createdAt)}}</span>
       <v-hover style="margin-top: 10px;">

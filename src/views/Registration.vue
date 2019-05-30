@@ -12,7 +12,7 @@
         v-model="username"
         type="text"
         label="Укажите имя пользователя"
-        solo
+        solo-inverted
       ></v-text-field>
     </v-flex>
     <span style="font-size: 18px; font-style: italic; padding-left: 10px; " >Пароль:</span>
@@ -21,11 +21,11 @@
         v-model="password"
         type="password"
         label="Укажите пароль"
-        solo
+        solo-inverted
       ></v-text-field>
     </v-flex>
-    <v-btn round color="blue darken-4" style="width:150px;" @click="register" dark>Регистрация</v-btn>
-    <router-link to = "/login" style = "font-size: 16px; margin-left: 20px;">Уже есть аккаунт?</router-link>
+    <v-btn color="primary" depressed style="width:120px;" @click="register" dark>Регистрация</v-btn>
+    <router-link to = "/login" depressed style = "font-size: 16px; color: black; margin-left: 20px;">Уже есть аккаунт?</router-link>
   </div>
   </div>
 </template>
