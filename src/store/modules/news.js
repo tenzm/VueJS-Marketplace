@@ -5,7 +5,8 @@ export default {
       {
         title: "Хранилище",
         text: "Заработало!",
-        img: "coffee.jpg"
+        img: "coffee.jpg", 
+        createdAt: Date
       }
     ]
   },
