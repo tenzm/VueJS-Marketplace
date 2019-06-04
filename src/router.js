@@ -24,6 +24,10 @@ const router = new Router({
       component: ShopItem
     },
     {
+      path: "/",
+      redirect: "/shop"
+    },
+    {
       path: "/news",
       component: News,
     },
