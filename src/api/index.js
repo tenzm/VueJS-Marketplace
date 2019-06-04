@@ -11,6 +11,7 @@ axios.interceptors.request.use(
 export default {
   urls: {
     news: "/news",
+    shop: "/shop",
     users: "/users",
     login: "/auth/login",
     logout: "/auth/logout",

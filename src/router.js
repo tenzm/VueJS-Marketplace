@@ -6,6 +6,7 @@ import Shop from "./views/Shop.vue";
 import ShopItem from "./views/ShopItem.vue";
 import News from "./views/News.vue";
 import AddNews from "./views/AddNews.vue";
+import AddProduct from "./views/AddShopProduct.vue";
 import Chat from "./views/Chat.vue";
 import Profile from "./views/Profile.vue";
 import Registration from "./views/Registration";
@@ -26,6 +27,10 @@ const router = new Router({
     {
       path: "/",
       redirect: "/shop"
+    },
+    {
+      path: "/new-product",
+      component: AddProduct
     },
     {
       path: "/news",

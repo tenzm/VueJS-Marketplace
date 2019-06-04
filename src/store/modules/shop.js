@@ -1,3 +1,4 @@
+import api from '@/api';
 export default {
   state: {
     goods: {
@@ -67,13 +68,11 @@ export default {
     }
   },
   actions: {
-    add_article({commit }, send_id, message) {
-        let new_message = {
-            owner_id: send_id,
-            owner_message: message,
-            sending_time: "--:--"
-        } 
-      commit("add_message", new_message);
+    add_product({commit}, product) {
+      api.axios.post(api.urls["shop"], product).then(res=>{
+        console.log(res.data);
+        //commit("add_news", res.data);
+      });
     }
   }
 };
