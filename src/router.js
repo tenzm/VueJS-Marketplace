@@ -3,6 +3,7 @@ import store from "./store/modules/users";
 import api from "@/api";
 import Router from "vue-router";
 import Shop from "./views/Shop.vue";
+import ShopItem from "./views/ShopItem.vue";
 import News from "./views/News.vue";
 import AddNews from "./views/AddNews.vue";
 import Chat from "./views/Chat.vue";
@@ -15,8 +16,12 @@ Vue.use(Router);
 const router = new Router({
   routes: [
     {
-      path: "/",
+      path: "/shop",
       component: Shop
+    },
+    {
+      path: "/shop/:id",
+      component: ShopItem
     },
     {
       path: "/news",

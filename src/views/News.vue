@@ -11,7 +11,7 @@
         </div>
       </v-flex>
     <div style="margin: 0px auto; width:800px; margin-top: 20px; padding-bottom: 60px">
-      <div v-for="(item, key) in news" :key="key" style="margin-top: 20px;">
+      <div v-for="(item, key) in news" :key="key" style="margin-top: 20px;" class = "news">
     <span v-if="key == 0 || is_not_equal_date(news[key].createdAt, news[key-1].createdAt)" class="headline font-weight-light" style="margin-top:30px;">{{formatDate(item.createdAt)}}</span>
       <v-hover style="margin-top: 10px;">
         <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`" class="mx-auto">
@@ -74,7 +74,7 @@ export default {
 };
 </script>
 <style>
-.v-image__image--cover {
+.news .v-image__image--cover {
     width: 150px !important;
     background-size: cover;
 }
