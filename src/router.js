@@ -30,7 +30,10 @@ const router = new Router({
     },
     {
       path: "/new-product",
-      component: AddProduct
+      component: AddProduct,
+      meta:{
+        requiresAuth: true
+      }
     },
     {
       path: "/news",

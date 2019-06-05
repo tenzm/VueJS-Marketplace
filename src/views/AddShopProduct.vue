@@ -18,7 +18,7 @@
           <v-stepper-content step="1">
             <v-card class="mb-5" height="130px" style="padding-top: 30px;">
                   <v-text-field
-                    label="Укажите заголовок для новости"
+                    label="Тип продукта"
                     outline
                     counter="75"
                     required
@@ -27,7 +27,6 @@
                 </v-card>
             <v-btn color="primary" @click="e1 = 2">Далее</v-btn>
             <v-btn disabled color="grey lighten-2" @click="e1 = 2">Назад</v-btn>
-            <v-btn flat>Отмена</v-btn>
           </v-stepper-content>
 
           <v-stepper-step :complete="e1 > 2" step="2">Укажите название продукта</v-stepper-step>
@@ -44,7 +43,6 @@
                 </v-card>
             <v-btn color="primary" @click="e1 = 3">Далее</v-btn>
             <v-btn color="grey lighten-2" @click="e1 = 1">Назад</v-btn>
-            <v-btn flat>Отмена</v-btn>
           </v-stepper-content>
 
           <v-stepper-step :complete="e1 > 3" step="3">Добавьте характеристики для продукта</v-stepper-step>
@@ -100,7 +98,6 @@
             </v-card>
             <v-btn color="primary" @click="e1 = 4">Далее</v-btn>
             <v-btn color="grey lighten-2" @click="e1 = 2">Назад</v-btn>
-            <v-btn flat>Отмена</v-btn>
           </v-stepper-content>
 
           <v-stepper-step :complete="e1 > 4" step="4">Добавьте изображение продукта</v-stepper-step>
@@ -113,7 +110,6 @@
                 </v-card>
             <v-btn color="primary" @click="e1 = 5">Далее</v-btn>
             <v-btn color="grey lighten-2" @click="e1 = 3">Назад</v-btn>
-            <v-btn flat>Отмена</v-btn>
           </v-stepper-content>
 
           <v-stepper-step :complete="e1 > 5" step="5">Укажите цену</v-stepper-step>
@@ -129,7 +125,6 @@
                 </v-card>
                 <v-btn color="success" @click="makeAndSave">Опубликовать</v-btn>
             <v-btn color="grey lighten-2" @click="e1 = 4">Назад</v-btn>
-            <v-btn flat>Отмена</v-btn>
           </v-stepper-content>
         </v-stepper>
       </v-app>
@@ -186,6 +181,9 @@ export default {
 
   methods: {
     ...mapActions(["add_product", "uploadImage"]),
+    returnToShop(){
+      this.$router.push("/shop");
+    },
     makeAndSave(){
         let buildOptions = {};
         for(let i = 0; i < this.desserts.length; i++)
@@ -202,7 +200,7 @@ export default {
             img: src
         }
       this.add_product(product);
-      this.$router.push("/shop");
+      this.returnToShop();
       });
     },
 

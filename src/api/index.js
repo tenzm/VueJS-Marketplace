@@ -16,6 +16,8 @@ export default {
     login: "/auth/login",
     logout: "/auth/logout",
     check: "/auth/check",
+    cart: "/auth/cart",
+    uncart: "/auth/uncart",
     uploads: "/uploads"
   },
   axios: axios
