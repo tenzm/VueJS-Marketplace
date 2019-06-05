@@ -14,23 +14,23 @@
       <v-layout row wrap>
         <v-flex xs10 offset-xs1 class="clearfix" style="text-align: center; margin-top: 50px;">
           <div style="width: 320px; display: inline-block; vertical-align: top;">
-            <v-img :aspect-ratio="3/4" :src="product.image"></v-img>
+            <v-img :aspect-ratio="3/4" :src="goods[id].image"></v-img>
           </div>
           <div
             style="display: inline-block; vertical-align: top; text-align: left; margin-left: 30px; margin-top: 30px;"
           >
-            <span class="display-3 font-weight-light" style="display:block;">{{product.name}}</span>
+            <span class="display-3 font-weight-light" style="display:block;">{{goods[id].name}}</span>
             <span class="headline" style="margin-top: 30px; display: block;">Характеристики:</span>
             <span
               class="title font-weight-light"
               style="margin-top: 10px; display: block;"
-              v-for="(item, key) in product.options"
+              v-for="(item, key) in goods[id].options"
               :key="key"
             >
               <span class="font-weight-regular">{{key}}:</span>
               {{item}}
             </span>
-            <span class="headline" style="margin-top: 30px; display: block;">{{product.price}} ₽</span>
+            <span class="headline" style="margin-top: 30px; display: block;">{{goods[id].price}} ₽</span>
             <div>
               <v-btn
                 large
@@ -38,6 +38,12 @@
                 class="subheading"
                 style="color: white; margin-left: -2px; margin-top: 10px;"
               >Купить</v-btn>
+              <v-btn
+                large
+                color="red darken-1"
+                class="subheading"
+                style="color: white; margin-left: -2px; margin-top: 10px;"
+              >В корзину</v-btn>
             </div>
           </div>
         </v-flex>
@@ -56,15 +62,23 @@ export default {
       product: ""
     };
   },
-  computed: {
-    ...mapState({
-      goods: state => state.shop.goods
-    })
+  methods: {
+    ...mapActions(["get_product"]),
+    load_products(id){
+      this.get_product(id);
+    },
   },
   beforeMount() {
     this.id = this.$route.params.id;
-    this.product = this.goods[this.id];
-    console.log(this.product);
+    this.load_products(this.id);
+  },
+  computed: {
+    ...mapState({
+      goods: state => state.shop.goods
+    }),
+  },
+  beforeDestroy: {
+    
   }
 };
 </script>

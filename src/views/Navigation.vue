@@ -1,6 +1,6 @@
 <template>
   <v-toolbar color="grey lighten-4" dark extended>
-      <v-btn icon light v-on="on" @click="add_to_cart" class="black--text" style="border: 0;">
+      <v-btn icon light v-on="on" to="/shopcart" class="black--text" style="border: 0;">
           <v-icon>shopping_cart</v-icon>
         </v-btn>
     <v-spacer></v-spacer>
