@@ -81,7 +81,7 @@
                       <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn color="blue darken-1" flat @click="close">Отмена</v-btn>
-                        <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+                        <v-btn color="blue darken-1" flat @click="save">Сохранить</v-btn>
                       </v-card-actions>
                     </v-card>
                   </v-dialog>
@@ -94,9 +94,6 @@
                       <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
                       <v-icon small @click="deleteItem(props.item)">delete</v-icon>
                     </td>
-                  </template>
-                  <template v-slot:no-data>
-                    <v-btn color="primary" @click="initialize">Reset</v-btn>
                   </template>
                 </v-data-table>
               </div>
@@ -188,21 +185,25 @@ export default {
   },
 
   methods: {
-    ...mapActions(["add_product"]),
+    ...mapActions(["add_product", "uploadImage"]),
     makeAndSave(){
         let buildOptions = {};
         for(let i = 0; i < this.desserts.length; i++)
             buildOptions[this.desserts[i].name] = this.desserts[i].value;
         
+        let formData = new FormData();
+        formData.append("image", this.$refs.inputProductFile.files[0]);
+        this.uploadImage(formData).then(src => {
         let product = {
-            id: 0,
             name: this.productName,
             type: this.productType,
             options: buildOptions,
             price: this.productPrice,
-            img: "https://istoremsk.ru/image/cache/catalog/macbookpro15/new/space/1-450x550.jpg"
+            img: src
         }
       this.add_product(product);
+      this.$router.push("/shop");
+      });
     },
 
     initialize() {

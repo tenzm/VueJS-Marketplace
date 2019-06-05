@@ -1,77 +1,38 @@
-import api from '@/api';
+import api from "@/api";
 export default {
   state: {
-    goods: {
-      "12345": {
-        type: "Мобильный телефон",
-        name: "Apple iPhone 7",
-        options: {
-          "Бренд": "Apple",
-          "Модель": "Iphone 7",
-          "ОЗУ": "1 ГБ",
-          "Операционная система": "iOS",
-          "Встроенная память": "128 ГБ"
-        },
-      price: "39 990",
-      image: "https://istoremsk.ru/image/cache/catalog/iPhone/Iphone_7/Mat/1-450x550.jpg",
-      },
-      "23456": {
-        type: "Моноблок",
-        name: "Apple iMac Pro",
-        options: {
-          "Бренд": "Apple",
-          "Модель": "iMac Pro",
-          "ОЗУ": "32 ГБ",
-          "Операционная система": "MacOS",
-          "Встроенная память": "1 ТБ"
-        },
-      price: "379 990",
-      image: "https://istoremsk.ru/image/cache/catalog/imac/pro/pro/1-450x550.jpg",
-    },
-    "34567": {
-      type: "Ноутбук",
-      name: "Apple MacBook Pro",
-      options: {
-        "Бренд": "Apple",
-        "Модель": "MacBook Pro",
-        "ОЗУ": "32 ГБ",
-        "Операционная система": "MacOS",
-        "Встроенная память": "1 ТБ"
-      },
-    price: "297 990",
-    image: "https://istoremsk.ru/image/cache/catalog/macbookpro15/new/space/1-450x550.jpg",
-  },
-  "45678": {
-    type: "Док станция",
-    name: "Apple Mac Pro",
-    options: {
-      "Бренд": "Apple",
-      "Модель": "Mac Pro",
-      "ОЗУ": "16 ГБ",
-      "Операционная система": "MacOS",
-      "Встроенная память": "256 ГБ"
-    },
-  price: "279 990",
-  image: "https://istoremsk.ru/image/cache/catalog/mac_pro/1-450x550.jpg",
-  }
-},
+    goods: {}
   },
   mutations: {
-    add_chat(state, chat) {
-      state.chats.push(chat);
+    add_product(state, res) {
+      let new_product = {
+        type: res["type"],
+        name: res["name"],
+        options: res["options"],
+        price: res["price"],
+        image: res["img"]
+      };
+      state.goods[res["_id"]] = new_product;
     },
-    add_message(state, message) {
-        state.chat.messages.push(message);
-    },
-    set_news(state, news) {
-      state.news = news;
+    remove_products(state) {
+      state.goods = {};
     }
   },
   actions: {
-    add_product({commit}, product) {
-      api.axios.post(api.urls["shop"], product).then(res=>{
-        console.log(res.data);
-        //commit("add_news", res.data);
+    add_product({ commit }, product) {
+      api.axios.post(api.urls["shop"], product).then(res => {
+        commit("add_product", res.data);
+        //console.log(res.data["_id"]);
+        //
+      });
+    },
+    get_products({ commit }) {
+      api.axios.get(api.urls["shop"]).then(res => {
+        commit("remove_products", res.data);
+        let data = res.data;
+        for (let i = 0; i < data.length; i++) {
+          commit("add_product", data[i]);
+        }
       });
     }
   }

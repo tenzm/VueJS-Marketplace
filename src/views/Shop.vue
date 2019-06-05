@@ -63,6 +63,15 @@
 import { mapState, mapActions } from "vuex";
 export default {
   name: "shop",
+  methods:{
+    ...mapActions(["get_products"]),
+    load_products(){
+      this.get_products();
+    }
+  },
+  beforeMount(){
+    this.load_products();
+  },
   computed: {
     ...mapState({
       goods: state => state.shop.goods,
