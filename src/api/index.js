@@ -18,7 +18,9 @@ export default {
     check: "/auth/check",
     cart: "/auth/cart",
     uncart: "/auth/uncart",
-    uploads: "/uploads"
+    uploads: "/uploads",
+    chats: "/chats",
+    messages: "/chats/messages"
   },
   axios: axios
 };

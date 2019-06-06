@@ -7,7 +7,7 @@
       height="150"
     >
       <v-layout align-center column justify-center>
-        <h1 class="display-2 font-weight-thin mb-3">Магазин</h1>
+        <h1 class="display-2 font-weight-thin mb-3">Моя корзина</h1>
       </v-layout>
     </v-parallax>
     <v-container grid-list-xl >

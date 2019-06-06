@@ -83,6 +83,8 @@ export default {
           commit("add_to_cart", scart[i]);
         }
       });
-    }
+    },
+
+    
   }
 };
