@@ -21,6 +21,7 @@ export default {
     uploads: "/uploads",
     chats: "/chats",
     messages: "/chats/messages",
+    messages_check: "/chats/messages/check",
     avatar: "/users/avatar"
   },
   axios: axios

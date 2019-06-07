@@ -107,10 +107,12 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import api from "@/api"
+import { setInterval } from 'timers';
 export default {
   name: "chat",
   methods: {
-    ...mapActions(["add_article", "get_usernames", "sendMessage", "getMessages"]),
+    ...mapActions(["add_article", "get_usernames", "sendMessage", "getMessages", "checkMessages"]),
     getImgUrl(pic) {
       return require("../assets/" + pic);
     },
@@ -119,6 +121,12 @@ export default {
     },
     get_messages(){
       this.getMessages();
+    },
+    check_messages(){
+        this.checkMessages();
+    },
+    start_message_control_service(){
+      var timerId = setTimeout(this.check_messages(), 2000);
     },
     send_message(message_to, message_text, chat_id = null){
       let new_message = {
@@ -134,12 +142,6 @@ export default {
       return this.users.id;
     }
   },
-  created(){
-    this.getUsernames();
-    this.get_messages();
-    console.log("Users:");
-    console.log(this.users);
-  },
   computed: {
     ...mapState({
       chats: state => state.chat.chats,
@@ -148,7 +150,13 @@ export default {
       messages: state => state.chat.messages,
       me: state => state.chat.me,
       me_avatar: state => state.users.avatar,
+      count: state => state.chat.count,
     })
+  },
+  created(){
+    this.getUsernames();
+    this.get_messages();
+    this.check_messages();
   },
   data() {
     return {

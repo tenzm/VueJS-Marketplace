@@ -6,6 +6,7 @@ export default {
     chats: [],
     messages: [],
     users: {},
+    count: 0,
   },
 
   getters: {
@@ -26,11 +27,22 @@ export default {
       })
     },
     getMessages({ state, commit }) {
-      return api.axios.get(api.urls.messages)
+      api.axios.get(api.urls.messages)
       .then(res => {
         commit("setMessages", res.data)
-        return res.data
+        res.data
       })
+      
+    },
+    checkMessages({ state, dispatch, commit }, messages_count) {
+      this.timerId = setInterval(function tick() {
+        api.axios.post(api.urls.messages_check, {"count": state.count})
+        .then(res => {
+          if(res.data){
+            dispatch('getMessages');
+          }
+        })
+      }, 4000);
     },
     sendMessage({ state, commit }, message) {
       return api.axios.post(api.urls.messages, message)
@@ -65,6 +77,7 @@ export default {
     },
     setMessages(state, messages) {
       state.messages = messages;
+      state.count = messages.length;
     },
     setUsernames(state, usernames) {
       state.users = usernames;
