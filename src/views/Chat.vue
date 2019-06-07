@@ -55,7 +55,7 @@
                 <v-hover>
                   <v-card
                     style="width: 70%; margin-top: -5px; 
-    text-align: right; border-radius: 10px 0 10px 10px; float:right;   margin-right: 45px;"
+    text-align: right; border-radius: 10px 0 10px 10px; float:right;   margin-right: 60px;"
                   >
                     <v-card-title>{{message.text}}</v-card-title>
                   </v-card>
