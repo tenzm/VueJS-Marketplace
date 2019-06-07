@@ -36,6 +36,8 @@ export default {
     },
     unauthorize({state, commit}){
       commit("authorization", false);
+      commit("set_avatar", false);
+      commit("set_username", false);
       localStorage.removeItem("jwt");
     },
     save_avatar({state, commit}, image){

@@ -43,7 +43,7 @@
               <div v-if="message.to == selected_chat_id || message.from == selected_chat_id" style="    
 ">
                 <div v-if="message.from == me.id" style="margin-top:10px; margin-bottom: 10px; 
-    padding-left: 10%; width: 100%; text-align: right; float:right;">
+    padding-left: 30%; width: 100%; text-align: right; float:right;">
                 <span
                   style="margin-right:10px; font-size:14px; font-weight: bold; "
                 >

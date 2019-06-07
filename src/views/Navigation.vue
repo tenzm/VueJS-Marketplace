@@ -53,11 +53,6 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   name: "navigation",
-  computed: {
-    ...mapState({
-      auth: state => state.users.authorized
-    })
-  },
   methods:{
     ...mapActions(["unauthorize", "add_cart", "get_me"]),
     logout: function() {
@@ -76,6 +71,7 @@ export default {
   computed: {
     ...mapState({
       avatar: state => state.users.avatar,
+      auth: state => state.users.authorized,
     })
   },
 };
