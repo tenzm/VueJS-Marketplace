@@ -51,8 +51,7 @@ export default {
         commit("setMe", res.data.me);
         return res.data();
       });
-    }
-
+    },
   },
 
   mutations: {

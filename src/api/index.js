@@ -20,7 +20,8 @@ export default {
     uncart: "/auth/uncart",
     uploads: "/uploads",
     chats: "/chats",
-    messages: "/chats/messages"
+    messages: "/chats/messages",
+    avatar: "/users/avatar"
   },
   axios: axios
 };

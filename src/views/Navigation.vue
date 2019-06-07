@@ -22,8 +22,12 @@
     <v-menu open-on-hover bottom>
       <template v-slot:activator="{ on }">
         <v-btn icon light v-on="on" class="black--text" style="border: 0;">
-          <v-icon>account_circle</v-icon>
+          <v-icon v-if="avatar == 'null' || avatar == ''">account_circle</v-icon>
+           <v-avatar :size="40" style="margin-right: 10px;" v-else>
+                  <v-img :src="avatar" spect-ratio="1" height="40" ></v-img>
+                </v-avatar>
         </v-btn>
+       
       </template>
 
       <v-list>
@@ -46,7 +50,6 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import { setTimeout } from 'timers';
 
 export default {
   name: "navigation",
@@ -56,13 +59,24 @@ export default {
     })
   },
   methods:{
-    ...mapActions(["unauthorize", "add_cart"]),
+    ...mapActions(["unauthorize", "add_cart", "get_me"]),
     logout: function() {
       this.unauthorize();
     },
     add_to_cart(){
       this.add_cart();
+    },
+    load_avatar(){
+      this.get_me()
     }
-  }
+  },
+  created(){
+    this.load_avatar();
+  },
+  computed: {
+    ...mapState({
+      avatar: state => state.users.avatar,
+    })
+  },
 };
 </script>

@@ -43,7 +43,8 @@ export default {
     register() {
       this.createUser({
         username: this.username,
-        password: this.password
+        password: this.password,
+        avatar: 'null',
       });
     }
   }

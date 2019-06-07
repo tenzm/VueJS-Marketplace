@@ -22,7 +22,7 @@
                 <img :src="chat.chat_cover_img">
               </v-avatar>-->
               <v-list-tile-content>
-                <v-list-tile-title v-html="user"></v-list-tile-title>
+                <v-list-tile-title v-html="user.username"></v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-list>
@@ -40,19 +40,22 @@
                 v-for="(message, key) in messages"
                 :key="key"
               >
-              <div v-if="message.to == selected_chat_id || message.from == selected_chat_id">
-                <div v-if="message.from == me.id" style="margin-top:10px; margin-bottom: 10px; width: 100%; text-align: right;">
+              <div v-if="message.to == selected_chat_id || message.from == selected_chat_id" style="    
+">
+                <div v-if="message.from == me.id" style="margin-top:10px; margin-bottom: 10px; 
+    padding-left: 10%; width: 100%; text-align: right; float:right;">
                 <span
-                  style="margin-right:10px; font-size:14px; font-weight: bold;"
+                  style="margin-right:10px; font-size:14px; font-weight: bold; "
                 >
                 {{ me.username }}</span>
                 <v-avatar :size="40" style="margin-right: 10px;">
-                  <img src="https://cdn4.iconfinder.com/data/icons/animal-2-1/100/animal-15-512.png">
+                  <v-img :src="me_avatar" spect-ratio="1" height="40" ></v-img>
                 </v-avatar>
                 
                 <v-hover>
                   <v-card
-                    style="width: 70%; margin-top: -5px; margin-left:45px; border-radius: 10px 0 10px 10px;"
+                    style="width: 70%; margin-top: -5px; 
+    text-align: right; border-radius: 10px 0 10px 10px; float:right;   margin-right: 45px;"
                   >
                     <v-card-title>{{message.text}}</v-card-title>
                   </v-card>
@@ -60,13 +63,13 @@
               </div>
               <div v-else style="margin-left:10px; margin:10px; width: 100%;">
                 <v-avatar :size="40">
-                  <img src="https://cdn4.iconfinder.com/data/icons/animal-2-1/100/animal-15-512.png">
+                  <v-img :src="users[message.from].avatar" spect-ratio="1" height="40" ></v-img>
                 </v-avatar>
                 <span
                   style="margin-left:10px; font-size:14px; font-weight: bold;"
                   v-if="message.from != me.id"
                 >
-                {{ users[message.from] }}</span>
+                {{ users[message.from].username }}</span>
                 <span
                   style="margin-left:10px; font-size:14px; font-weight: bold;"
                   v-else
@@ -144,6 +147,7 @@ export default {
       users: state => state.chat.users,
       messages: state => state.chat.messages,
       me: state => state.chat.me,
+      me_avatar: state => state.users.avatar,
     })
   },
   data() {
