@@ -22,11 +22,12 @@ export default {
     createUser({ state, commit }, user) {
       api.axios.post(api.urls.users, user);
     },
-    login({ state, commit }, user) {
+    login({ dispatch, commit }, user) {
       api.axios.post(api.urls.login, user).then(res => {
         localStorage.setItem("jwt", res.data);
         if(res.status != 404){
           commit("authorization", true);
+          dispatch('get_me');
           router.push('/');
         }
       });

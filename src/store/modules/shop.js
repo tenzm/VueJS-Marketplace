@@ -84,7 +84,8 @@ export default {
         }
       });
     },
-
-    
+    unauthorize({state, commit}){
+      commit("remove_cart");
+    }
   }
 };

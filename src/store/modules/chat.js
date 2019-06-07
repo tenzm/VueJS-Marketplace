@@ -52,6 +52,11 @@ export default {
         return res.data();
       });
     },
+    unauthorize({state, commit}){
+      commit("setUsernames", {});
+      commit("setMessages", []);
+      commit("setMe", {});
+    }
   },
 
   mutations: {
