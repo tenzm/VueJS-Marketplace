@@ -116,7 +116,7 @@
           <v-stepper-content step="5">
             <v-card class="mb-5" height="130px" style="padding-top: 30px;">
                   <v-text-field
-                    label="Цена"
+                    label="Цена (без валюты)"
                     outline
                     counter="75"
                     required
