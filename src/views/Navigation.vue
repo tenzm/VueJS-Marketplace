@@ -57,6 +57,9 @@ export default {
     ...mapActions(["unauthorize", "add_cart", "get_me"]),
     logout: function() {
       this.unauthorize();
+      if(this.$route.path == "/profile"){
+        this.$router.push("/login");
+      }
     },
     add_to_cart(){
       this.add_cart();
