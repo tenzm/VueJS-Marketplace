@@ -84,7 +84,6 @@ export default {
     },
     addMessage(state, message) {
       state.messages.push(message);
-      console.log(state.messages);
     },
     setMe(state, me) {
       state.me = me;

@@ -157,7 +157,6 @@ export default {
     this.mes_text = "";
     },
     get_username_by_id(id){
-      console.log(this.users[id]);
       return this.users.id;
     }
   },
