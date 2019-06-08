@@ -1,4 +1,5 @@
 import api from '@/api';
+import router from '../../router';
 export default {
   state: {
     news: [
@@ -22,6 +23,9 @@ export default {
     add_news({ state, commit }, article) {
       api.axios.post(api.urls["news"], article).then(res=>{
         commit("add_news", res.data);
+
+        this.timerId = setTimeout(function tick() {router.push("/news"); }, 4000);
+        
       });
     },
     get_news({ state, commit }) {

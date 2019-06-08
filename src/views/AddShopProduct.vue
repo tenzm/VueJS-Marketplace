@@ -123,12 +123,32 @@
                     v-model="productPrice"
                   ></v-text-field>
                 </v-card>
-                <v-btn color="success" @click="makeAndSave">Опубликовать</v-btn>
+                <v-btn color="success" @click="makeAndSave" :disabled="sending_dialog" :loading="sending_dialog">Опубликовать</v-btn>
             <v-btn color="grey lighten-2" @click="e1 = 4">Назад</v-btn>
           </v-stepper-content>
         </v-stepper>
       </v-app>
     </div>
+    <v-dialog
+      v-model="sending_dialog"
+      hide-overlay
+      persistent
+      width="300"
+    >
+      <v-card
+        color="primary"
+        dark
+      >
+        <v-card-text>
+          Подождите, пожалуйста. Ваш продукт загружается на сервер.
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -142,6 +162,7 @@ export default {
     inputProductFile: "",
     e1: 1,
     dialog: false,
+    sending_dialog: false,
     headers: [
       {
         text: "Тип",
@@ -181,9 +202,6 @@ export default {
 
   methods: {
     ...mapActions(["add_product", "uploadImage"]),
-    returnToShop(){
-      this.$router.push("/shop");
-    },
     makeAndSave(){
         let buildOptions = {};
         for(let i = 0; i < this.desserts.length; i++)
@@ -199,8 +217,8 @@ export default {
             price: this.productPrice,
             img: src
         }
+      this.sending_dialog = true;
       this.add_product(product);
-      this.returnToShop();
       });
     },
 

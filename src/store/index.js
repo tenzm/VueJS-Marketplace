@@ -8,11 +8,10 @@ import shop from './modules/shop';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  
   modules: {
     news,
     chat,
     users,
-    shop,
+    shop
   }
 });

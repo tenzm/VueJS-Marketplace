@@ -1,4 +1,6 @@
 import api from "@/api";
+import router from '../../router';
+
 export default {
   state: {
     goods: {},
@@ -33,6 +35,8 @@ export default {
     add_product({ commit }, product) {
       api.axios.post(api.urls["shop"], product).then(res => {
         commit("add_product", res.data);
+
+        this.timerId = setTimeout(function tick() { router.push("/shop"); }, 4000);
       });
     },
     get_products({ commit }) {
