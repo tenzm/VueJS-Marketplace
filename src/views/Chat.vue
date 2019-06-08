@@ -18,7 +18,7 @@
             <v-list-tile
               v-for="(user, key) in users"
               :key="key"
-              @click="selected_chat_id = key"
+              @click="change_selected_id(key)"
             >
               <v-avatar :size="40" style="margin-right:10px;">
                 <img :src="user.avatar"  spect-ratio="1" height="40" >
@@ -39,7 +39,7 @@
             <v-subheader v-if="selected_chat_id != '-1'"><b >{{users[selected_chat_id].username}}</b></v-subheader>
             <v-subheader v-else>Выберите пользователя:</v-subheader>
             <v-divider></v-divider>
-            <div class="scroll-y" style="height: 89%; text-align: left; overflow-x: hidden;">
+            <div class="scroll-y" style="height: 89%; text-align: left; overflow-x: hidden;" ref="messages_panel" id = "messages_panel"  v-chat-scroll>
               <div
                 v-for="(message, key) in messages"
                 :key="key"
@@ -128,6 +128,9 @@ export default {
     },
     get_messages(){
       this.getMessages();
+    },
+    change_selected_id(id){
+      this.selected_chat_id = id; 
     },
     check_messages(){
         this.checkMessages();
