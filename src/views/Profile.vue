@@ -48,7 +48,6 @@ export default {
       let formData = new FormData();
       formData.append("image", this.$refs.inputAvatar.files[0]);
       this.uploadImage(formData).then(src => {
-        console.log(src);
         this.save_avatar({"avatar": src});
       });
     },

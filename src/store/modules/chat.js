@@ -61,7 +61,7 @@ export default {
       api.axios.get(api.urls["users"]).then(res=>{
         commit("setUsernames", res.data.users);
         commit("setMe", res.data.me);
-        return res.data();
+        return res.data;
       });
     },
     unauthorize({state, commit}){
@@ -84,7 +84,6 @@ export default {
     },
     addMessage(state, message) {
       state.messages.push(message);
-      console.log(state.messages);
     },
     setMe(state, me) {
       state.me = me;

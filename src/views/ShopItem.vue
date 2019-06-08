@@ -14,7 +14,7 @@
       <v-layout row wrap>
         <v-flex xs10 offset-xs1 class="clearfix" style="text-align: center; margin-top: 50px;">
           <div style="width: 320px; display: inline-block; vertical-align: top;">
-            <v-img :aspect-ratio="3/4" :src="goods[id].image"></v-img>
+            <v-img :aspect-ratio="3/4" v-if="goods[id].image != undefined" :src="goods[id].image"></v-img>
           </div>
           <div
             style="display: inline-block; vertical-align: top; text-align: left; margin-left: 30px; margin-top: 30px;"
@@ -30,20 +30,35 @@
               <span class="font-weight-regular">{{key}}:</span>
               {{item}}
             </span>
-            <span class="headline" style="margin-top: 30px; display: block;">{{goods[id].price}} ₽</span>
-            <div>
+            <div style="width: 100%; display: inline-block;">
+            <span class="headline" style="margin-top: 30px; display: block; float: left;">{{goods[id].price}} ₽</span>
+            <span v-if="is_in_cart" class="title" style="    color: rgb(139, 195, 74);
+    float: left;
+    margin-top: 32px;"><v-icon right color="light-green" style="font-style: 14px; margin-right: 10px;">done</v-icon>В корзине.</span>
+            
+            </div><div>
               <v-btn
                 large
-                color="red darken-1"
+                color="blue"
                 class="subheading"
                 style="color: white; margin-left: -2px; margin-top: 10px;"
               >Купить</v-btn>
               <v-btn
                 large
-                color="red darken-1"
+                color="light-green"
                 class="subheading"
                 style="color: white; margin-left: -2px; margin-top: 10px;"
-              >В корзину</v-btn>
+                @click="add_to_cart"
+                v-if="!is_in_cart"
+              >Добавить в корзину</v-btn>
+              <v-btn
+                large
+                color="red darken-3"
+                class="subheading"
+                style="color: white; margin-left: -2px; margin-top: 10px;"
+                @click="remove_from_cart"
+                v-if="is_in_cart"
+              >Удалить из корзины</v-btn>
             </div>
           </div>
         </v-flex>
@@ -54,32 +69,50 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import { constants } from 'crypto';
 export default {
-  name: "shop",
+  name: "shopitem",
   data() {
     return {
       id: "",
-      product: ""
+      product: "",
+      is_in_cart: false, 
     };
   },
   methods: {
-    ...mapActions(["get_product"]),
-    load_products(id){
-      this.get_product(id);
+    ...mapActions(["get_products", "add_cart", "get_cart", "rem_cart"]),
+    load_products(){
+      this.get_products();
+      this.get_cart()
     },
+    add_to_cart(){
+      this.add_cart(this.id);
+      this.is_in_cart = true;
+    },
+    remove_from_cart(){
+      this.rem_cart(this.id);
+      this.is_in_cart = false;
+    }
   },
   beforeMount() {
     this.id = this.$route.params.id;
     this.load_products(this.id);
+    if(this.cart[this.id] != undefined){
+      this.is_in_cart = true;
+      }
   },
   computed: {
     ...mapState({
-      goods: state => state.shop.goods
+      goods: state => state.shop.goods,
+      cart: state => state.shop.cart
     }),
+    function () {
+      this.load_products();
+      if(this.cart[this.id] != undefined){
+      this.is_in_cart = true;
+      }
+    }
   },
-  beforeDestroy: {
-    
-  }
 };
 </script>
 

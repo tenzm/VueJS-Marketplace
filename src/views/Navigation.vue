@@ -57,6 +57,9 @@ export default {
     ...mapActions(["unauthorize", "add_cart", "get_me"]),
     logout: function() {
       this.unauthorize();
+      if(this.$route.path == "/profile" || this.$route.path == "/shopcart" || this.$route.path == "/new-product" || this.$route.path == "/add_news"){
+        this.$router.push("/login");
+      }
     },
     add_to_cart(){
       this.add_cart();
@@ -74,5 +77,8 @@ export default {
       auth: state => state.users.authorized,
     })
   },
+  data: () => ({
+    on: false,
+  })
 };
 </script>

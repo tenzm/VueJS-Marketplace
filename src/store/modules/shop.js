@@ -19,7 +19,6 @@ export default {
     },
     add_to_cart(state, id) {
       state.cart[id] = state.goods[id];
-      console.log(state.cart);
     },
     rem_from_cart(state, id) {
       delete state.cart[id];
@@ -53,7 +52,6 @@ export default {
         commit("remove_goods");
         let data = res.data;
         for(let i = 0; i < data.length; i++){
-          console.log(data[i]["_id"] + "==" + product_id);
           if(data[i]["_id"] == product_id){
             commit("add_product", data[i]);
           }
@@ -81,7 +79,6 @@ export default {
     get_cart({ commit }) {
       api.axios.get(api.urls["cart"]).then(res => {
         commit("remove_cart");
-        console.log(res.data);
         let scart = res.data;
         for(let i = 0; i < scart.length; i++){
           commit("add_to_cart", scart[i]);

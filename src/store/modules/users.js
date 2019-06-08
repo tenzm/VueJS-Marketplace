@@ -34,11 +34,7 @@ export default {
         if(res.status != 404){
           dispatch('login', user);
         }
-        else{
-          console.log("erf1e");
-        }
       }).catch(() => {
-        console.log("erfe2");
         commit("set_register_error", true);
       });
     },
@@ -76,5 +72,9 @@ export default {
           commit("set_username", res.data.username);
       });
     },
+    remove_errors({state, commit}){
+      commit("set_login_error", false);
+      commit("set_register_error", false);
+    }
   }
 };

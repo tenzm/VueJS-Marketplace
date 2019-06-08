@@ -100,7 +100,7 @@
             <v-btn color="grey lighten-2" @click="e1 = 2">Назад</v-btn>
           </v-stepper-content>
 
-          <v-stepper-step :complete="e1 > 4" step="4">Добавьте изображение продукта</v-stepper-step>
+          <v-stepper-step :complete="e1 > 4" step="4">Добавьте изображение продукта (обязательно)</v-stepper-step>
 
           <v-stepper-content step="4">
             <v-card class="mb-5" height="130px" style="padding-top:40px;">
@@ -116,7 +116,7 @@
           <v-stepper-content step="5">
             <v-card class="mb-5" height="130px" style="padding-top: 30px;">
                   <v-text-field
-                    label="Цена"
+                    label="Цена (без валюты)"
                     outline
                     counter="75"
                     required

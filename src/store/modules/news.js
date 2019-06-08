@@ -2,14 +2,7 @@ import api from '@/api';
 import router from '../../router';
 export default {
   state: {
-    news: [
-      {
-        title: "Хранилище",
-        text: "Заработало!",
-        img: "coffee.jpg", 
-        createdAt: Date
-      }
-    ]
+    news: []
   },
   mutations: {
     add_news(state, article) {

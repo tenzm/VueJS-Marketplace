@@ -47,8 +47,8 @@
                   <v-btn v-else @click="rem_cart(key);" color="red darken-3" style="float: left; width: 125px; height: 90%; color: white; margin-left: -16px; border-radius: 0px; z-index: 3; text-align: left;">
                     <v-icon right dark style="margin-left: 3px;">remove_shopping_cart</v-icon>
                   </v-btn>
-                  <v-btn color="teal lighten-5" style="float: left; width: 125px; height: 90%; color: black; margin-left: -8px; border-radius: 0px; z-index: 3; text-align: center;">
-                    <v-icon right dark style="margin-left: 3px;">add</v-icon>
+                  <v-btn :to="'/shop/' + key" color="teal lighten-5" style="float: left; width: 125px; height: 90%; color: black; margin-left: -8px; border-radius: 0px; z-index: 3; text-align: center;">
+                    <v-icon right dark style="margin-left: 3px;">toc</v-icon>
                   </v-btn>
                 </div>
 
@@ -95,7 +95,10 @@ export default {
       goods: state => state.shop.goods,
       cart: state => state.shop.cart,
       auth: state => state.users.authorized,
-    })
+    }),
+    function () {
+      this.load_products();
+    }
   },
 };
 </script>

@@ -6,7 +6,7 @@
       </v-layout>
     </v-parallax>
     
-  <v-container grid-list-xl style="text-align: center; display: inline-block;">
+  <v-container grid-list-xl style="text-align: center; padding-bottom: 100px;">
     <v-flex style="width: 400px; text-align: left; margin: 0 auto; margin-top:15vh;">
     <span style="font-size: 18px; font-style: italic; padding-left: 10px;" >Имя пользователя:</span>
       <v-text-field
@@ -48,13 +48,15 @@ export default {
     password: "",
   }),
   methods: {
-    ...mapActions(["login"]),
+    ...mapActions(["login", "remove_errors"]),
     do_login(data){
       this.login(data)
       this.is_login_error = true;
     }
   },
-
+  beforeMount(){
+    this.remove_errors();
+  },
   computed: {
     ...mapState({
       is_login_error: state => state.users.errors.login_error,
