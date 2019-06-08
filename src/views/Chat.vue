@@ -9,7 +9,8 @@
       <v-layout row wrap>
         <v-flex xs10 offset-xs1 class="clearfix" style="text-align: center; margin-top: 50px; display: inherit; 
     margin-left: 0;">
-        <v-card style="width: 12vw;" class="chat">
+        <v-card style="width: 12vw; 
+    height: 510px;" class="chat">
           <!-- Adaptability will be made in the future -->
           <v-list subheader>
             <v-subheader>Чат</v-subheader>
@@ -35,7 +36,8 @@
     min-width: 100%;">
           
           <v-card style="height: 450px;">
-            <v-subheader><b>{{users[selected_chat_id].username}}</b></v-subheader>
+            <v-subheader v-if="selected_chat_id != '-1'"><b >{{users[selected_chat_id].username}}</b></v-subheader>
+            <v-subheader v-else>Выберите пользователя:</v-subheader>
             <v-divider></v-divider>
             <div class="scroll-y" style="height: 89%;">
               <div
@@ -89,13 +91,13 @@
             </div>
             </div>
           </v-card>
-          <div style="margin-top: 10px;">
+          <div style="margin-top: 10px;  display: flex;">
             <v-text-field
               v-model="mes_text"
               solo
               label="Сообщение"
               clearable
-              style="width: 90%; float:left;"
+              style="float:left;"
             ></v-text-field>
             <v-btn flat icon color="#212121" @click="send_message(selected_chat_id, mes_text)" style="float:right;">
               <v-icon>send</v-icon>
@@ -145,6 +147,11 @@ export default {
       return this.users.id;
     }
   },
+  beforeMount(){
+    this.getUsernames();
+    this.get_messages();
+    this.check_messages();
+  },
   computed: {
     ...mapState({
       chats: state => state.chat.chats,
@@ -156,14 +163,9 @@ export default {
       count: state => state.chat.count,
     })
   },
-  created(){
-    this.getUsernames();
-    this.get_messages();
-    this.check_messages();
-  },
   data() {
     return {
-      selected_chat_id: -1,
+      selected_chat_id: '-1',
     };
   }
 };
