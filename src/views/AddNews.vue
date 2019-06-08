@@ -10,7 +10,6 @@
         <h1 class="display-2 font-weight-thin mb-3">Добавить новость</h1>
       </v-layout>
     </v-parallax>
-    <div style="margin: 50px auto; width:800px;">
       <div id="app">
         <v-app id="inspire">
           <v-stepper v-model="e1">
@@ -23,7 +22,7 @@
 
               <v-divider></v-divider>
 
-              <v-stepper-step step="3">Загрузите изображение (опционально)</v-stepper-step>
+              <v-stepper-step step="3">Загрузите изображение (обязательно)</v-stepper-step>
             </v-stepper-header>
 
             <v-stepper-items>
@@ -41,7 +40,6 @@
                 <v-btn color="primary" @click="e1 = 2">Далее</v-btn>
                 <v-btn disabled color="grey lighten-2" @click="e1 = 2">Назад</v-btn>
 
-                <v-btn flat>Отмена</v-btn>
               </v-stepper-content>
 
               <v-stepper-content step="2">
@@ -58,7 +56,6 @@
                 <v-btn color="primary" @click="e1 = 3">Далее</v-btn>
                 <v-btn color="grey lighten-2" @click="e1 = 1">Назад</v-btn>
 
-                <v-btn flat>Отмена</v-btn>
               </v-stepper-content>
 
               <v-stepper-content step="3">
@@ -71,13 +68,11 @@
                 <v-btn color="success" @click="addd_news" :disabled="dialog" :loading="dialog">Опубликовать</v-btn>
                 <v-btn color="grey lighten-2" @click="e1 = 2">Назад</v-btn>
 
-                <v-btn flat>Отмена</v-btn>
               </v-stepper-content>
             </v-stepper-items>
           </v-stepper>
         </v-app>
       </div>
-    </div>
     <v-dialog
       v-model="dialog"
       hide-overlay
