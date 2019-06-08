@@ -33,13 +33,13 @@
         </v-card>
         
         <v-flex xs4 style="margin-left: 10px; 
-    min-width: 100%;">
+    min-width: 100%; ">
           
           <v-card style="height: 450px;">
             <v-subheader v-if="selected_chat_id != '-1'"><b >{{users[selected_chat_id].username}}</b></v-subheader>
             <v-subheader v-else>Выберите пользователя:</v-subheader>
             <v-divider></v-divider>
-            <div class="scroll-y" style="height: 89%;">
+            <div class="scroll-y" style="height: 89%; text-align: left; overflow-x: hidden;">
               <div
                 v-for="(message, key) in messages"
                 :key="key"
@@ -48,6 +48,7 @@
 ">
                 <div v-if="message.from == me.id" style="margin-top:10px; margin-bottom: 10px; 
     padding-left: 30%; width: 100%; text-align: right; float:right;">
+    <div style="float:right; width: 100%;">
                 <span
                   style="margin-right:10px; font-size:14px; font-weight: bold; "
                 >
@@ -55,13 +56,14 @@
                 <v-avatar :size="40" style="margin-right: 10px;">
                   <v-img :src="me_avatar" spect-ratio="1" height="40" ></v-img>
                 </v-avatar>
-                
+                </div>
                 <v-hover>
                   <v-card
-                    style="width: 70%; margin-top: -5px; 
-    text-align: right; border-radius: 10px 0 10px 10px; float:right;   margin-right: 60px;"
+                    style="width: max-content; margin-top: -5px; 
+    text-align: right; border-radius: 10px 0 10px 10px; float:right;   margin-right: 60px;
+    max-width: 40vw;"
                   >
-                    <v-card-title>{{message.text}}</v-card-title>
+                    <v-card-title><span style="width: 100%; word-wrap: break-word !important;">{{message.text}}</span></v-card-title>
                   </v-card>
                 </v-hover>
               </div>
@@ -81,9 +83,9 @@
                 {{ me.username }}</span>
                 <v-hover>
                   <v-card
-                    style="width: 70%; margin-top: -5px; margin-left:45px; border-radius: 0 10px 10px 10px;"
+                    style="width: max-content; margin-top: -5px; margin-left:45px; border-radius: 0 10px 10px 10px; max-width: 40vw;"
                   >
-                    <v-card-title>{{message.text}}</v-card-title>
+                    <v-card-title><span style="width: 100%; word-wrap: break-word !important;">{{message.text}}</span></v-card-title>
                   </v-card>
                 </v-hover>
               </div>
