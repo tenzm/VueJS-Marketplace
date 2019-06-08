@@ -5,22 +5,23 @@
         <h1 class="display-2 font-weight-thin mb-3">Чаты</h1>
       </v-layout>
     </v-parallax>
-    <v-container>
-      <v-layout row justify-center style="margin-top: 40px;">
-        <v-card style="width: 270px;">
+    <v-container grid-list-xs>
+      <v-layout row wrap>
+        <v-flex xs10 offset-xs1 class="clearfix" style="text-align: center; margin-top: 50px; display: inherit; 
+    margin-left: 0;">
+        <v-card style="width: 12vw;" class="chat">
           <!-- Adaptability will be made in the future -->
           <v-list subheader>
-            <v-subheader>Доступные чаты
-{{selected_chat_id}}</v-subheader>
+            <v-subheader>Чат</v-subheader>
             <v-divider></v-divider>
             <v-list-tile
               v-for="(user, key) in users"
               :key="key"
               @click="selected_chat_id = key"
             >
-              <!--<v-avatar :size="40" style="margin-right:10px;">
-                <img :src="chat.chat_cover_img">
-              </v-avatar>-->
+              <v-avatar :size="40" style="margin-right:10px;">
+                <img :src="user.avatar"  spect-ratio="1" height="40" >
+              </v-avatar>
               <v-list-tile-content>
                 <v-list-tile-title v-html="user.username"></v-list-tile-title>
               </v-list-tile-content>
@@ -30,10 +31,11 @@
           <v-divider></v-divider>
         </v-card>
         
-        <v-flex xs4 style="margin-left: 10px;">
+        <v-flex xs4 style="margin-left: 10px; 
+    min-width: 100%;">
           
           <v-card style="height: 450px;">
-            <v-subheader>Сообщения</v-subheader>
+            <v-subheader><b>{{users[selected_chat_id].username}}</b></v-subheader>
             <v-divider></v-divider>
             <div class="scroll-y" style="height: 89%;">
               <div
@@ -100,6 +102,7 @@
             </v-btn>
           </div>
         </v-flex>
+      </v-flex>
       </v-layout>
     </v-container>
   </div>
@@ -161,33 +164,44 @@ export default {
   data() {
     return {
       selected_chat_id: -1,
-      items: [
-        {
-          active: true,
-          title: "Jason Oner",
-          avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
-        },
-        {
-          active: true,
-          title: "Ranee Carlson",
-          avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg"
-        },
-        {
-          title: "Cindy Baker",
-          avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg"
-        },
-        {
-          title: "Ali Connors",
-          avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg"
-        }
-      ],
-      items2: [
-        {
-          title: "Travis Howard",
-          avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg"
-        }
-      ]
     };
   }
 };
 </script>
+<style>
+@media screen and (max-width: 1040px) {
+.chat .v-list__tile {
+    padding: 4px 3px;
+    text-align: center;
+    display: block;
+}
+.chat .v-list__tile__content {
+    visibility: hidden;
+    width: 0;
+}
+.chat .v-list__tile__title {
+    width: 0;
+}
+.chat .v-avatar {
+    margin: 0 !important;
+}
+}
+
+@media screen and (max-width: 425px) {
+  .chat .v-avatar{
+    height: 25px !important;
+    width: 25px !important;
+  }
+  .chat .v-list__tile {
+    padding: 12px 3px;
+    text-align: center;
+    display: block;
+}
+.v-subheader {
+    display: inline-grid;
+    text-align: center;
+    padding: 0;
+}
+}
+
+</style>
