@@ -3,8 +3,11 @@ import store from "./store/modules/users";
 import api from "@/api";
 import Router from "vue-router";
 import Shop from "./views/Shop.vue";
+import Shopcart from "./views/Shopcart.vue";
+import ShopItem from "./views/ShopItem.vue";
 import News from "./views/News.vue";
 import AddNews from "./views/AddNews.vue";
+import AddProduct from "./views/AddShopProduct.vue";
 import Chat from "./views/Chat.vue";
 import Profile from "./views/Profile.vue";
 import Registration from "./views/Registration";
@@ -15,8 +18,27 @@ Vue.use(Router);
 const router = new Router({
   routes: [
     {
-      path: "/",
+      path: "/shop",
       component: Shop
+    },
+    {
+      path: "/shopcart",
+      component: Shopcart
+    },
+    {
+      path: "/shop/:id",
+      component: ShopItem
+    },
+    {
+      path: "/",
+      redirect: "/shop"
+    },
+    {
+      path: "/new-product",
+      component: AddProduct,
+      meta:{
+        requiresAuth: true
+      }
     },
     {
       path: "/news",
@@ -35,7 +57,10 @@ const router = new Router({
     },
     {
       path: "/profile",
-      component: Profile
+      component: Profile,
+      meta:{
+        requiresAuth: true
+      }
     },
     { path: "/registration", component: Registration },
     { path: "/login", component: Login }

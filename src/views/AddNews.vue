@@ -68,7 +68,7 @@
                   </form>
                 </v-card>
 
-                <v-btn color="success" @click="addd_news">Опубликовать</v-btn>
+                <v-btn color="success" @click="addd_news" :disabled="dialog" :loading="dialog">Опубликовать</v-btn>
                 <v-btn color="grey lighten-2" @click="e1 = 2">Назад</v-btn>
 
                 <v-btn flat>Отмена</v-btn>
@@ -78,6 +78,26 @@
         </v-app>
       </div>
     </div>
+    <v-dialog
+      v-model="dialog"
+      hide-overlay
+      persistent
+      width="300"
+    >
+      <v-card
+        color="primary"
+        dark
+      >
+        <v-card-text>
+          Подождите, пожалуйста. Ваша новость загружается на сервер.
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -88,7 +108,8 @@ export default {
   data: () => ({
     headtitle: "",
     content: "",
-    e1: 0
+    e1: 0,
+    dialog: false
   }),
   methods: {
     ...mapActions(["add_news", "uploadImage"]),
@@ -101,8 +122,9 @@ export default {
         text: this.content,
         img: src
       };
+
+      this.dialog = true;
       this.add_news(article);
-      this.$router.push("/news");
       });
     }
   }

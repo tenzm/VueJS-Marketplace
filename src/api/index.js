@@ -11,11 +11,18 @@ axios.interceptors.request.use(
 export default {
   urls: {
     news: "/news",
+    shop: "/shop",
     users: "/users",
     login: "/auth/login",
     logout: "/auth/logout",
     check: "/auth/check",
-    uploads: "/uploads"
+    cart: "/auth/cart",
+    uncart: "/auth/uncart",
+    uploads: "/uploads",
+    chats: "/chats",
+    messages: "/chats/messages",
+    messages_check: "/chats/messages/check",
+    avatar: "/users/avatar"
   },
   axios: axios
 };

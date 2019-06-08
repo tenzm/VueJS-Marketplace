@@ -7,21 +7,17 @@
       height="150"
     >
       <v-layout align-center column justify-center>
-        <h1 class="display-2 font-weight-thin mb-3">Магазин</h1>
+        <h1 class="display-2 font-weight-thin mb-3">Моя корзина</h1>
       </v-layout>
     </v-parallax>
-    <v-flex text-xs-center>
-        <div>
-          <v-btn round color="blue darken-2" style="color: white; margin-top:10px;" large v-if="auth" @click="go_to_add_page">Добавить</v-btn>
-        </div>
-      </v-flex>
     <v-container grid-list-xl >
     <v-layout row wrap>
       <v-flex xs10 offset-xs1 style = "display: inline-block; text-align: center;" class="clearfix">
         <v-hover style = "
         vertical-align:top;display: inline-block; text-align: left; margin: 25px; position: relative;
-			box-sizing: border-box;" v-for="(item, key) in goods" :key="key">
+			box-sizing: border-box;" v-for="(item, key) in cart" :key="key">
           <v-card
+           v-if="item != null"
             slot-scope="{ hover }"
             :class="`elevation-${hover ? 12 : 2}`"
             width="250px"
@@ -41,10 +37,7 @@
                   style="display: block; margin-top: 10px;"
                 >{{item.type}}</span></div>
                 <div v-if="hover" style="height: 100%; float: left; width: 250px;">
-                  <v-btn v-if="cart[key] != goods[key]" @click="add_to_cart(key)" color="teal darken-4" style="float: left; width: 125px; height: 90%; color: white; margin-left: -16px; border-radius: 0px; z-index: 3; text-align: left;">
-                    <v-icon right dark style="margin-left: 3px;">local_grocery_store</v-icon>
-                  </v-btn>
-                  <v-btn v-else @click="rem_cart(key);" color="red darken-3" style="float: left; width: 125px; height: 90%; color: white; margin-left: -16px; border-radius: 0px; z-index: 3; text-align: left;">
+                  <v-btn @click="remove_from_cart(key);" color="red darken-3" style="float: left; width: 125px; height: 90%; color: white; margin-left: -16px; border-radius: 0px; z-index: 3; text-align: left;">
                     <v-icon right dark style="margin-left: 3px;">remove_shopping_cart</v-icon>
                   </v-btn>
                   <v-btn color="teal lighten-5" style="float: left; width: 125px; height: 90%; color: black; margin-left: -8px; border-radius: 0px; z-index: 3; text-align: center;">
@@ -70,7 +63,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 export default {
-  name: "shop",
+  name: "shopcart",
   methods:{
     ...mapActions(["get_products", "add_cart", "get_cart", "rem_cart"]),
     load_products(){
@@ -85,6 +78,7 @@ export default {
     },
     remove_from_cart(id){
       this.rem_cart(id);
+      window.location.reload();
     }
   },
   beforeMount(){
@@ -97,6 +91,7 @@ export default {
       auth: state => state.users.authorized,
     })
   },
+  
 };
 </script>
 

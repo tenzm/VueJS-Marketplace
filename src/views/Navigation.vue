@@ -1,7 +1,8 @@
 <template>
   <v-toolbar color="grey lighten-4" dark extended>
-    <v-toolbar-side-icon class="black--text"></v-toolbar-side-icon>
-
+      <v-btn icon light v-on="on" to="/shopcart" class="black--text" style="border: 0;">
+          <v-icon>shopping_cart</v-icon>
+        </v-btn>
     <v-spacer></v-spacer>
     <template>
       <div class="display-1 font-weight-thin black--text display-1">Infinity Club</div>
@@ -21,8 +22,12 @@
     <v-menu open-on-hover bottom>
       <template v-slot:activator="{ on }">
         <v-btn icon light v-on="on" class="black--text" style="border: 0;">
-          <v-icon>account_circle</v-icon>
+          <v-icon v-if="avatar == 'null' || avatar == ''">account_circle</v-icon>
+           <v-avatar :size="40" style="margin-right: 10px;" v-else>
+                  <v-img :src="avatar" spect-ratio="1" height="40" ></v-img>
+                </v-avatar>
         </v-btn>
+       
       </template>
 
       <v-list>
@@ -45,20 +50,29 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import { setTimeout } from 'timers';
 
 export default {
   name: "navigation",
-  computed: {
-    ...mapState({
-      auth: state => state.users.authorized
-    })
-  },
   methods:{
-    ...mapActions(["unauthorize"]),
+    ...mapActions(["unauthorize", "add_cart", "get_me"]),
     logout: function() {
       this.unauthorize();
+    },
+    add_to_cart(){
+      this.add_cart();
+    },
+    load_avatar(){
+      this.get_me()
     }
-  }
+  },
+  created(){
+    this.load_avatar();
+  },
+  computed: {
+    ...mapState({
+      avatar: state => state.users.avatar,
+      auth: state => state.users.authorized,
+    })
+  },
 };
 </script>
