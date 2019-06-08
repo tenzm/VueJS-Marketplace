@@ -24,22 +24,41 @@
         solo-inverted
       ></v-text-field>
     </v-flex>
-    <v-btn color="primary" depressed style="width:120px;" @click="login({username, password})" dark>Войти</v-btn>
+    <v-alert
+      v-model="is_login_error"
+      :value="is_login_error"
+      type="error"
+      color="red"
+      style="margin-bottom: 20px;"
+    >
+      Неверное имя или пароль.
+    </v-alert>
+    <v-btn color="primary" depressed style="width:120px;" @click="do_login({username, password})" dark>Войти</v-btn>
     <router-link to = "/registration" depressed style = "font-size: 16px; color: black; margin-left: 20px;">Регистрация</router-link>
   </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "Login",
   data: () => ({
     username: "",
-    password: ""
+    password: "",
   }),
   methods: {
-    ...mapActions(["login"])
+    ...mapActions(["login"]),
+    do_login(data){
+      this.login(data)
+      this.is_login_error = true;
+    }
+  },
+
+  computed: {
+    ...mapState({
+      is_login_error: state => state.users.errors.login_error,
+      })
   }
 };
 </script>

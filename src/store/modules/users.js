@@ -5,7 +5,11 @@ export default {
   state: {
     authorized: false,
     avatar: "",
-    username: ""
+    username: "",
+    errors: {
+      "login_error": false,
+      "register_error": false,
+    }
   },
   mutations: {
     authorization(state, auth) {
@@ -16,6 +20,12 @@ export default {
     },
     set_username(state, username){
       state.username = username;
+    },
+    set_login_error(state, bool){
+      state.errors["login_error"] = bool;
+    },
+    set_register_error(state, bool){
+      state.errors["register_error"] = bool;
     },
   },
   actions: {
@@ -30,7 +40,9 @@ export default {
           dispatch('get_me');
           router.push('/');
         }
-      });
+      }).catch(() => {
+        commit("set_login_error", true);
+      })
     },
     authorize({ state, commit }, is_auth) {
       commit("authorization", is_auth);
