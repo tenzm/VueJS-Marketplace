@@ -180,6 +180,7 @@ export default {
   data() {
     return {
       selected_chat_id: '-1',
+      mes_text: "",
     };
   }
 };

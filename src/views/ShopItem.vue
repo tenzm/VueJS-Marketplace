@@ -14,7 +14,7 @@
       <v-layout row wrap>
         <v-flex xs10 offset-xs1 class="clearfix" style="text-align: center; margin-top: 50px;">
           <div style="width: 320px; display: inline-block; vertical-align: top;">
-            <v-img :aspect-ratio="3/4" :src="goods[id].image"></v-img>
+            <v-img :aspect-ratio="3/4" v-if="goods[id].image != undefined" :src="goods[id].image"></v-img>
           </div>
           <div
             style="display: inline-block; vertical-align: top; text-align: left; margin-left: 30px; margin-top: 30px;"
@@ -71,7 +71,7 @@
 import { mapState, mapActions } from "vuex";
 import { constants } from 'crypto';
 export default {
-  name: "shop",
+  name: "shopitem",
   data() {
     return {
       id: "",

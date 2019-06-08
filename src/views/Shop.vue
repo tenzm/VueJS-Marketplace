@@ -95,7 +95,10 @@ export default {
       goods: state => state.shop.goods,
       cart: state => state.shop.cart,
       auth: state => state.users.authorized,
-    })
+    }),
+    function () {
+      this.load_products();
+    }
   },
 };
 </script>
