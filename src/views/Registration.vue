@@ -24,6 +24,15 @@
         solo-inverted
       ></v-text-field>
     </v-flex>
+    <v-alert
+      v-model="register_error"
+      :value="register_error"
+      type="error"
+      color="red"
+      style="margin-bottom: 20px;"
+    >
+      Пользователь с таким именем уже существует.
+    </v-alert>
     <v-btn color="primary" depressed style="width:120px;" @click="register" dark>Регистрация</v-btn>
     <router-link to = "/login" depressed style = "font-size: 16px; color: black; margin-left: 20px;">Уже есть аккаунт?</router-link>
   </div>
@@ -31,7 +40,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "Registration",
   data: () => ({
@@ -46,7 +55,13 @@ export default {
         password: this.password,
         avatar: 'null',
       });
+      this.register_error = true
     }
+  },
+  computed: {
+    ...mapState({
+      register_error: state => state.users.errors.register_error,
+      })
   }
 };
 </script>

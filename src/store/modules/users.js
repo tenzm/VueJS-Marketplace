@@ -29,8 +29,18 @@ export default {
     },
   },
   actions: {
-    createUser({ state, commit }, user) {
-      api.axios.post(api.urls.users, user);
+    createUser({ dispatch, commit }, user) {
+      api.axios.post(api.urls.users, user).then(res => {
+        if(res.status != 404){
+          dispatch('login', user);
+        }
+        else{
+          console.log("erf1e");
+        }
+      }).catch(() => {
+        console.log("erfe2");
+        commit("set_register_error", true);
+      });
     },
     login({ dispatch, commit }, user) {
       api.axios.post(api.urls.login, user).then(res => {
