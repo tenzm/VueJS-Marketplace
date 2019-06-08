@@ -42,7 +42,7 @@ export default {
             dispatch('getMessages');
           }
         })
-      }, 4000);
+      }, 1000);
     },
     sendMessage({ state, commit }, message) {
       return api.axios.post(api.urls.messages, message)
