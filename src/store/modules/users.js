@@ -76,5 +76,9 @@ export default {
           commit("set_username", res.data.username);
       });
     },
+    remove_errors({state, commit}){
+      commit("set_login_error", false);
+      commit("set_register_error", false);
+    }
   }
 };

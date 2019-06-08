@@ -48,7 +48,7 @@ export default {
     password: ""
   }),
   methods: {
-    ...mapActions(["createUser"]),
+    ...mapActions(["createUser", "remove_errors"]),
     register() {
       this.createUser({
         username: this.username,
@@ -57,6 +57,10 @@ export default {
       });
       this.register_error = true
     }
+  },
+
+  beforeMount(){
+    this.remove_errors();
   },
   computed: {
     ...mapState({

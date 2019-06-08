@@ -48,13 +48,15 @@ export default {
     password: "",
   }),
   methods: {
-    ...mapActions(["login"]),
+    ...mapActions(["login", "remove_errors"]),
     do_login(data){
       this.login(data)
       this.is_login_error = true;
     }
   },
-
+  beforeMount(){
+    this.remove_errors();
+  },
   computed: {
     ...mapState({
       is_login_error: state => state.users.errors.login_error,
