@@ -6,7 +6,7 @@
       </v-layout>
     </v-parallax>
     
-  <v-container grid-list-xl style="text-align: center; display: inline-block;">
+  <v-container grid-list-xl style="text-align: center; padding-bottom: 100px;">
     <v-flex style="width: 400px; text-align: left; margin: 0 auto; margin-top:15vh;">
     <span style="font-size: 18px; font-style: italic; padding-left: 10px;" >Имя пользователя:</span>
       <v-text-field

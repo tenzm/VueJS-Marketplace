@@ -5,7 +5,7 @@
         <h1 class="display-2 font-weight-thin mb-3"><b>RealTime</b> Чат 🔥</h1>
       </v-layout>
     </v-parallax>
-    <v-container grid-list-xs>
+    <v-container grid-list-xs v-if="auth">
       <v-layout row wrap>
         <v-flex xs10 offset-xs1 class="clearfix" style="text-align: center; margin-top: 50px; display: inherit; 
     margin-left: 0;">
@@ -99,16 +99,24 @@
               solo
               label="Сообщение"
               clearable
+              :disabled="selected_chat_id == '-1'"
               style="float:left;"
             ></v-text-field>
-            <v-btn flat icon color="#212121" @click="send_message(selected_chat_id, mes_text)" style="float:right;">
+            <v-btn flat icon color="#212121" :disabled="selected_chat_id == '-1'" @click="send_message(selected_chat_id, mes_text)" style="float:right;">
               <v-icon>send</v-icon>
             </v-btn>
           </div>
         </v-flex>
       </v-flex>
       </v-layout>
+      
     </v-container>
+    <v-container v-else grid-list-xs style = "text-align: center;">
+      
+      <span style="margin: 0 auto; width: 100%;" class="headline font-weight-light">Чат доступен только для зарегестрированных пользователей.</span>
+      
+    </v-container>
+    
   </div>
 </template>
 
@@ -146,6 +154,7 @@ export default {
         text: message_text,
       }
     this.sendMessage(new_message)
+    this.mes_text = "";
     },
     get_username_by_id(id){
       console.log(this.users[id]);
@@ -153,9 +162,9 @@ export default {
     }
   },
   beforeMount(){
-    this.getUsernames();
-    this.get_messages();
-    this.check_messages();
+      this.getUsernames();
+      this.get_messages();
+      this.check_messages();
   },
   computed: {
     ...mapState({
@@ -166,6 +175,7 @@ export default {
       me: state => state.chat.me,
       me_avatar: state => state.users.avatar,
       count: state => state.chat.count,
+      auth: state => state.users.authorized,
     })
   },
   data() {
